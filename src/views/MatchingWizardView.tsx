@@ -112,12 +112,16 @@ export const MatchingWizardView: React.FC = () => {
  const isInr = selectedDonor.amount.includes('R') || selectedDonor.amount.includes('₹');
  const symb = isInr ?'Rs.':'$';
 
- let unitCost = isInr ? 3500 : 50;
- if (selectedDonor.purpose.includes('Corneal') || selectedDonor.purpose.includes('Child')) {
- unitCost = isInr ? 7000 : 100;
- } else if (selectedDonor.purpose.includes('Food') || selectedDonor.purpose.includes('Annadhanam')) {
- unitCost = isInr ? 10000 : 200;
- }
+    let unitCost = isInr ? 3000 : 30;
+    if (selectedDonor.purpose.includes('Corneal') || selectedDonor.purpose.includes('Child') || selectedDonor.purpose.includes('Pediatric')) {
+      unitCost = isInr ? 3000 : 100;
+    } else if (selectedDonor.purpose.includes('Food') || selectedDonor.purpose.includes('Annadhanam')) {
+      unitCost = isInr ? 10000 : 200;
+    } else if (selectedDonor.purpose.includes('Eye Camp')) {
+      unitCost = isInr ? 60000 : 1000;
+    } else if (selectedDonor.purpose.includes('Endow') || selectedDonor.purpose.includes('Day')) {
+      unitCost = isInr ? 180000 : 3000;
+    }
 
  const maxSurgeries = Math.floor(rawNum / unitCost);
  const isPartial = rawNum < unitCost;
@@ -153,7 +157,7 @@ export const MatchingWizardView: React.FC = () => {
  }
  });
 
- const targetCostInr = 3500;
+ const targetCostInr = 3000;
  const fundedPct = Math.min(100, Math.round((totalInr / targetCostInr) * 100));
  const isTargetMet = totalInr >= targetCostInr;
  const deficitInr = Math.max(0, targetCostInr - totalInr);
@@ -373,7 +377,7 @@ export const MatchingWizardView: React.FC = () => {
  }`}
  >
  <Layers className="h-3.5 w-3.5"/>
- Standard 1-to-1 & Multi-Patient
+ 🎯 Manual Match (Direct 1-to-1 & Multi-Patient)
  </button>
 
  <button
@@ -385,7 +389,7 @@ export const MatchingWizardView: React.FC = () => {
  }`}
  >
  <HeartHandshake className="h-3.5 w-3.5 text-amber-200"/>
- Co-Sponsorship Pooling (₹1500 + ₹2000)
+ 🤝 Co-Sponsorship Pooling (Micro-Donors)
  </button>
 
  <button
@@ -397,7 +401,7 @@ export const MatchingWizardView: React.FC = () => {
  }`}
  >
  <FileText className="h-3.5 w-3.5 text-amber-200"/>
- Overall Allocation Ledger ({matchedLedgerRows.length})
+ 📑 Allocation Ledger & Statement Audit ({matchedLedgerRows.length})
  </button>
  </div>
  </div>
@@ -711,7 +715,7 @@ export const MatchingWizardView: React.FC = () => {
  </div>
  )}
 
- {/* MODE 3: Overall Allocation Ledger Panel - Pure White Theme */}
+ {/* MODE 3: 📑 Allocation Ledger & Statement Audit Panel - Pure White Theme */}
  {matchingMode ==='overall_ledger'&& (
  <div className="space-y-4">
  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">

@@ -688,12 +688,16 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       const currency: 'USD' | 'INR' | 'GBP' | 'EUR' = isInr ? 'INR' : 'USD';
       const symb = isInr ? '₹' : '$';
 
-      // Standardize unit costs across purposes
-      let unitCost = isInr ? 3500 : 50;
+      // Standardize unit costs across purposes to official master chart
+      let unitCost = isInr ? 3000 : 30;
       if (donor.purpose.includes('Corneal') || donor.purpose.includes('Child') || donor.purpose.includes('Pediatric')) {
-        unitCost = isInr ? 7000 : 100;
+        unitCost = isInr ? 3000 : 100;
       } else if (donor.purpose.includes('Food') || donor.purpose.includes('Annadhanam')) {
         unitCost = isInr ? 10000 : 200;
+      } else if (donor.purpose.includes('Eye Camp')) {
+        unitCost = isInr ? 60000 : 1000;
+      } else if (donor.purpose.includes('Endow') || donor.purpose.includes('Day')) {
+        unitCost = isInr ? 180000 : 3000;
       }
 
       const isPartial = rawNum < unitCost;

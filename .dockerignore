@@ -1,0 +1,14 @@
+node_modules
+dist
+.git
+.gitignore
+.DS_Store
+*.log
+*.zip
+*.sql
+scraped_data
+extracted_*
+swethusrentaloutfits_com*
+report.excel
+once.csv
+.env*

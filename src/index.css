@@ -1,0 +1,72 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+ :root {
+ --font-sans:'Plus Jakarta Sans','Inter', system-ui, -apple-system, sans-serif;
+ }
+ 
+ body {
+ font-family: var(--font-sans);
+ letter-spacing: -0.01em;
+ }
+}
+
+/* Custom Origin UI Glassmorphism and scrollbars */
+::-webkit-scrollbar {
+ width: 6px;
+ height: 6px;
+}
+
+::-webkit-scrollbar-track {
+ background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+ background: #cbd5e1;
+ border-radius: 9999px;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+ background: #334155;
+}
+
+::-webkit-scrollbar-thumb:hover {
+ background: #94a3b8;
+}
+
+/* Origin UI Glows & Subtle animations */
+@keyframes pulse-subtle {
+ 0%, 100% { opacity: 1; transform: scale(1); }
+ 50% { opacity: 0.85; transform: scale(0.98); }
+}
+
+.animate-pulse-subtle {
+ animation: pulse-subtle 3s infinite ease-in-out;
+}
+
+/* Print styles for Donor Feedback Certificates */
+@media print {
+ body * {
+ visibility: hidden;
+ }
+ #printable-certificate, #printable-certificate * {
+ visibility: visible;
+ }
+ #printable-certificate {
+ position: absolute;
+ left: 0;
+ top: 0;
+ width: 100%;
+ margin: 0;
+ padding: 20px;
+ background: white !important;
+ color: black !important;
+ box-shadow: none !important;
+ border: none !important;
+ }
+ .no-print {
+ display: none !important;
+ }
+}
